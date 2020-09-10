@@ -117,7 +117,7 @@ simplelink:
     dest: "~/"
 
   - src: "{{ playbook_dir }}/files/font"
-    dest: "~/"
+    dest: "~/.fonts"
 
   - src: "{{ playbook_dir }}/files/systemenv/environment.d"
     dest: "~/.config/environment.d"
