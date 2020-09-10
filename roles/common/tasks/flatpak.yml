@@ -1,0 +1,13 @@
+# flatpak remote-add --if-not-exists [ name ] [ url ]
+- name: "flatpak - add repos"
+  loop: "{{ flatpak.repos }}"
+  flatpak_remote:
+    name: "{{ item.name }}"
+    flatpakrepo_url: "{{ item.url }}"
+  
+# flatpak install [ packages ]
+- name: "flatpak - install packages"
+  loop: "{{ flatpak.install_packages }}"
+  flatpak:
+    # the default remote is "flathub"
+    name: "{{ item }}"

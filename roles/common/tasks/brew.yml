@@ -1,0 +1,15 @@
+# installation script
+- name: "brew - run installation script"
+  shell: CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" < /dev/null
+    
+# brew update
+- name: "brew - update packages"
+  homebrew:
+    update_homebrew: yes
+
+# brew install [ packages ]
+- name: "brew - install packages"
+  loop: "{{ brew.install_packages }}"
+  homebrew:
+    path: /home/linuxbrew/.linuxbrew/bin
+    name: "{{ item }}"

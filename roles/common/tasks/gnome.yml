@@ -1,0 +1,14 @@
+# install extensions at ~/.local/share/gnome-shell/extensions
+- name: "gnome - install extensions"
+  include_role:
+    name: jaredhocutt.gnome_extensions
+  vars:
+    gnome_extension_ids: "{{ gnome.extension_ids }}"
+
+- name: "gnome - write key-value settings"
+  loop: "{{ gnome.gsettings | subelements('contents') }}"
+  shell: "gsettings set {{ item.0.path }} {{ item.1.key}} {{ item.1.value }}"
+
+- name: "gnome - load setting file"
+  loop: "{{ gnome.dconf }}"
+  shell: "dconf load {{ item.path }}< {{ item.load_file }}"

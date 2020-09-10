@@ -1,0 +1,143 @@
+fedora:
+  # repo files are sotred at /etc/yum.repos.d/
+  repo:
+    raws:
+    - name: google-chrome
+      description: google-chrome
+      baseurl: http://dl.google.com/linux/chrome/rpm/stable/x86_64
+      gpgkey: https://dl.google.com/linux/linux_signing_key.pub
+      gpgcheck: yes
+
+    - name: code
+      description: Visual Studio Code
+      baseurl: https://packages.microsoft.com/yumrepos/vscode
+      gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+      gpgcheck: yes
+
+    urls: []
+
+    packages:
+    - https://free.nchc.org.tw/rpmfusion/free/fedora/rpmfusion-free-release-{{ ansible_distribution_version }}.noarch.rpm
+    - https://free.nchc.org.tw/rpmfusion/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_version }}.noarch.rpm
+
+    enables: []
+    
+  # rpm --import [ urls/ files ]
+  # display all imported gpg public key 
+  # rpm -q gpg-pubkey --qf '%{NAME}-%{VERSION}-%{RELEASE}\t%{SUMMARY}\n'  
+  gpgkeys: []
+
+  install_packages:
+  # Desktop
+  - gnome-tweaks
+  - dconf-editor
+  - gstreamer1-libav   # generating video thumbnail
+  # GUI
+  - telegram-desktop
+  - nextcloud-client
+  - https://updates.getmailspring.com/download?platform=linuxRpm
+  - google-chrome-stable
+  - krita
+  - deja-dup
+  # CLI tools
+  - hub
+  - vim
+  - unar
+  - jq
+  - htop
+  - trash-cli
+  - youtube-dl
+  - ffmpeg
+  
+  remove_packages:
+  - fedora-chromium-config
+  
+# TODO: installation script
+brew:
+  install_packages:
+  - helm
+  - kubectl
+  - helmfile
+
+flatpak:
+  repos:
+  - name: flathub
+    url: https://flathub.org/repo/flathub.flatpakrepo
+
+  install_packages:
+  - com.bitwarden.desktop
+  - com.skype.Client 
+  - org.videolan.VL
+
+gnome:
+  extension_ids:
+  # dash to panel
+  - 1160
+  # desktop icon NG
+  - 2087
+  # app indicator
+  - 615
+  # emoji selector
+  - 1162
+  # night theme switcher
+  - 2236
+
+  gsettings:
+  - path: "org.gnome.desktop.wm.keybindings"
+    contents:
+    - key: "switch-to-workspace-up"
+      value: "[]"
+    - key: "switch-to-workspace-down"
+      value: "[]"
+    - key: "switch-to-workspace-left"
+      value: "[]"
+    - key: "switch-to-workspace-right"
+      value: "[]"
+
+  dconf:
+  - path: "/org/gnome/terminal/legacy/profiles:/"
+    load_file: "{{ playbook_dir }}/files/gnome/terminal.conf"
+
+simplelink:
+  files:
+  - src: "{{ playbook_dir }}/files/.gitconfig"
+    dest: "~/"
+
+  - src: "{{ playbook_dir }}/files/.vimrc"
+    dest: "~/"
+
+  - src: "{{ playbook_dir }}/files/.tmux.conf"
+    dest: "~/"
+
+  - src: "{{ playbook_dir }}/files/systemenv/xdg-user-dirs"
+    dest: "~/.config"
+    
+  dirs:
+  - src: "{{ playbook_dir }}/files/bash"
+    dest: "~/"
+
+  - src: "{{ playbook_dir }}/files/font"
+    dest: "~/"
+
+  - src: "{{ playbook_dir }}/files/systemenv/environment.d"
+    dest: "~/.config/environment.d"
+    force: yes
+
+  - src: "{{ playbook_dir }}/files/nextcloud"
+    # config directory for dnf managed nextcloud
+    dest: "~/.config/Nextcloud"   
+    force: yes
+
+  - src: "{{ playbook_dir }}/files/secret/kube"
+    dest: "~/.kube"
+
+  - src: "{{ playbook_dir }}/files/vscode/setting"
+    # config directory for dnf managed vscode
+    dest: "~/.config/Code/User"
+
+  - src: "{{ playbook_dir }}/files/secret/ssh"
+    dest: "~/.ssh"
+
+  # TODO: collect mailspring config files
+  # - src:
+  #   dest:

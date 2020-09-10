@@ -1,0 +1,12 @@
+# dnf install snapd
+- name: "snap - install snap"
+  become: yes
+  dnf: 
+    name: "snapd"
+
+# sudo snap install [ install_packages ]
+- name: "snap - install packages"
+  become: yes
+  loop: "{{ snap.install_packages }}"
+  snap:
+    name: "{{ item }}"

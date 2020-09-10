@@ -1,0 +1,23 @@
+# chomod 700 ~/.ssh
+- name: "ssh - set permission 700 on directory ~/.ssh"
+  file:
+    dest: "~/.ssh"
+    mode: '700'
+
+# chmod 600 ~/.ssh/config ~/.ssh/id_rsa
+- name:
+  loop:
+  - ~/.ssh/config
+  - ~/.ssh/id_rsa
+  file:
+    dest: "{{ item }}"
+    mode: '600'
+
+# chmod 644 ~/.ssh/*.pub ~/.ssh/known_hosts
+- name:
+  with_fileglob:
+  - ~/.ssh/*.pub
+  - ~/.ssh/known_hosts
+  file:
+    dest: "{{ item }}"
+    mode: '644'

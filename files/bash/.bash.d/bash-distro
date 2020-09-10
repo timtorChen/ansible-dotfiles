@@ -1,0 +1,8 @@
+source /etc/os-release
+
+base="$(dirname $BASH_SOURCE)"
+
+case "$ID" in
+fedora) source "$base/distro/bash-fedora" ;;
+ubuntu) source "$base/distro/bash-ubuntu" ;;
+esac

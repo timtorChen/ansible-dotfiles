@@ -1,0 +1,227 @@
+// 將您的按鍵組合放入此檔案中以覆寫預設值
+[
+    {
+        "key": "ctrl+r ",
+        "command": "workbench.action.openRecent"
+    },
+    {
+        "key": "ctrl+alt+n",
+        "command": "workbench.action.addRootFolder"
+    },
+    {
+        "key": "ctrl+alt+0",
+        "command": "workbench.files.action.collapseExplorerFolders"
+    },
+    {
+        "key": "ctrl+alt+w",
+        "command": "workbench.action.removeRootFolder"
+    },
+    {
+        "key": "ctrl+shift+oem_2",
+        "command": "workbench.action.terminal.split",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+5",
+        "command": "-workbench.action.terminal.split",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+alt+o",
+        "command": "workbench.action.openWorkspace"
+    },
+    {
+        "key": "ctrl+alt+s",
+        "command": "workbench.action.saveWorkspaceAs"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "-workbench.action.moveEditorToNextGroup"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "-workbench.action.moveEditorToPreviousGroup"
+    },
+    {
+        "key": "ctrl+k s",
+        "command": "saveAll"
+    },
+    {
+        "key": "alt+c",
+        "command": "-workbench.action.terminal.toggleFindCaseSensitive",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-workbench.action.terminal.toggleFindCaseSensitive",
+        "when": "terminalFindWidgetFocused"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindWidgetFocused"
+    },
+    {
+        "key": "alt+up",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+down",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+left",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+right",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindWidgetFocused || terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindWidgetFocused || terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindWidgetFocused || terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindWidgetFocused || terminalFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-toggleFindRegex",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-toggleSearchEditorRegex",
+        "when": "inSearchEditor && searchInputBoxFocus"
+    },
+    {
+        "key": "alt+r",
+        "command": "-toggleSearchRegex",
+        "when": "searchViewletFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-workbench.action.terminal.toggleFindCaseSensitive",
+        "when": "terminalFindWidgetFocused || terminalFocus"
+    },
+    {
+        "key": "ctrl+alt+c",
+        "command": "-search.action.copyPath",
+        "when": "fileMatchOrFolderMatchWithResourceFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-toggleFindCaseSensitive",
+        "when": "editorFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-toggleSearchCaseSensitive",
+        "when": "searchViewletFocus && !fileMatchOrFolderMatchFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-toggleSearchEditorCaseSensitive",
+        "when": "inSearchEditor && searchInputBoxFocus"
+    },
+    {
+        "key": "ctrl+meta+z",
+        "command": "workbench.action.minimizeOtherEditors"
+    },
+    {
+        "key": "ctrl+meta+e",
+        "command": "workbench.action.evenEditorWidths"
+    },
+    {
+        "key": "ctrl+k l",
+        "command": "workbench.action.editor.changeLanguageMode"
+    },
+    {
+        "key": "ctrl+k m",
+        "command": "-workbench.action.editor.changeLanguageMode"
+    },
+    {
+        "key": "alt+r",
+        "command": "-workbench.action.terminal.toggleFindRegex",
+        "when": "terminalFindFocused || terminalFocus"
+    },
+    {
+        "key": "alt+c",
+        "command": "-workbench.action.terminal.toggleFindCaseSensitive",
+        "when": "terminalFindFocused || terminalFocus"
+    },
+    {
+        "key": "ctrl+k g",
+        "command": "git-graph.view"
+    },
+    // Toggle between fullscreen editor and fullscreen terminal with "(alt) + (`)"
+    {
+        "key": "alt+`",
+        "command": "workbench.action.toggleMaximizedPanel",
+        "when": "!terminalFocus"
+    },
+    {
+        "key": "alt+`",
+        "command": "workbench.action.terminal.toggleTerminal",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+shift+up",
+        "command": "-workbench.action.terminal.scrollUp",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+alt+right",
+        "command": "workbench.action.moveEditorToRightGroup"
+    },
+    {
+        "key": "ctrl+alt+left",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "ctrl+alt+up",
+        "command": "workbench.action.moveEditorToAboveGroup"
+    },
+    {
+        "key": "ctrl+alt+down",
+        "command": "workbench.action.moveEditorToBelowGroup"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "-workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+k j",
+        "command": "workbench.action.openSettingsJson"
+    },
+    {
+        "key": "ctrl+k ctrl+s",
+        "command": "-workbench.action.openGlobalKeybindings"
+    },
+    {
+        "key": "ctrl+k k",
+        "command": "workbench.action.openGlobalKeybindingsFile"
+    }
+]

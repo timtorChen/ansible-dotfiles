@@ -1,0 +1,12 @@
+[user]
+	email = timtorchen@gmail.com
+	name = timtorChen
+	signingKey = F1801D0F038E98092972FDDBAE404DD02B551819
+[commit]
+	gpgsign = true
+
+[core]
+	editor = code --wait
+
+[url "git@github.com:"]
+  insteadOf = https://github.com/

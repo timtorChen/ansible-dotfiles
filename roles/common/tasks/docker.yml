@@ -1,0 +1,24 @@
+# TODO: add fine-grained os control
+# https://fedoramagazine.org/docker-and-fedora-32/
+- name: "docker - install docker (use moby-engine for Fedora version later then 32)"
+  become: yes
+  when: ansible_distribution == "Fedora" and ansible_distribution_version >= '32'
+  dnf: 
+    name: docker
+
+- name: "docker - install docker-compose"
+  become: yes
+  dnf:
+    name: docker-compose
+
+# sudo usermod -aG [ ansible_user_id ]
+- name: "docker - append 'docker' to {{ ansible_user_id }}'s group"
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+
+- name: "docker - change back to old cgroups"
+  become: yes
+  shell: grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"

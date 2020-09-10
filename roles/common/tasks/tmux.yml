@@ -1,0 +1,10 @@
+- name: "tmux - install tmux plugin manager (tpm)"
+  git: 
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+
+- name: "tmux - isntall plugins"
+  shell: ~/.tmux/plugins/tpm/bin/install_plugins 
+
+- name: "tmux - update plugins"
+  shell: ~/.tmux/plugins/tpm/bin/update_plugins all

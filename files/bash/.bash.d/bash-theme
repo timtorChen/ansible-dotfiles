@@ -1,0 +1,100 @@
+hex2rgb() {
+    hex="$1"
+    printf "%d %d %d\n" 0x${hex:0:2} 0x${hex:2:2} 0x${hex:4:2}
+}
+
+alias colortest="curl https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-bit-color.sh | bash"
+
+
+# ------ ANSI escape sequences ------
+# ANSI (American National Standards Institute) escape sequences 
+# is a standard to control the text color and style in terminal.
+# We largely use it to define the color and style of our Prompts,
+# LS_COLORS, tmux display and others related to terminal design.
+
+# ANSI escape sequences is simply a styling sequence encolsed in an escape block 
+#   1. Escape block starts with 
+#      an escape character (ESC), following by "[", your styling sequence, and end with "m"
+#      In bash, escape character is "\e" or "\033" or "\x1b"
+#
+#   2. Styling sequence, has two part
+#      I. SGR (Select Graphic Rendition) code
+#         define the text decoration, like bold, italic, underline ...
+#
+#      II. Color code
+#        define the text color and background color of the text
+#        there are three ways of color definition
+#          - 3 or 4 bit color
+#          - 8 bit color
+#          - 24 bit color, RGB color
+
+# SGR code
+NORMAL="0"
+BOLD="1"
+UNDERLINE="2"
+
+# Color code
+FG="38;2"                       # foreground of 24 bit colors
+BG="48;2"                       # background of 24 bit colors
+
+Theme="chalk"                   # My Current theme
+
+case "$Theme" in                # The color database 
+chalk)
+    Black="${FG};100;100;100"   #646464
+    Red="${FG};245;142;142"     #F58E8E
+    Green="${FG};169;211;171"   #A9D3AB
+    Yello="${FG};254;211;126"   #FED37E
+    Blue="${FG};122;171;212"    #7AABD4
+    Magenta="${FG};214;173;213" #D6ADD5
+    Cyan="${FG};121;212;213"    #79D4D5
+    White="${FG};212;212;212"   #D4D4D4
+    ;;
+esac
+
+ANSI() { printf "\e[$*m"; }
+
+default="$(ANSI "$White;$NORMAL")"
+boldWhite="$(ANSI "$White;$BOLD")"
+boldBlue="$(ANSI "$Blue;$BOLD")"
+commandStart="ψ"                 # candidates: ► > ➥ ψ δ 
+                                 # just like choosing the best chocolate or cheese ... so hard
+
+if [ "$SSH_CLIENT" ]; then       # if you are in a ssh session
+    commandStart="$"             # for normal user, start with "$"
+    if [ $(id -u) = 0 ]; then    
+    commandStart="#"             # for root, prompt "#"
+    fi
+fi
+
+# Prompt
+# Special characters
+#    \[ : begin of ANSI escape sequences
+#    \] : end of ANSI escape sequences
+#    \e : ASCII escape character
+#    \u : username
+#    \h : hostname
+#    \w : working directory 
+PS1="\[${default}\]$commandStart "
+PS1+="\[${default}\]"
+export PS1
+
+# LS_COLORS
+# Keys
+#    fi : normal file
+#    di : direcroty
+#    ln : symbolic link
+#    ex : executable file
+# example reference : https://github.com/kmalinich/kdm-bash-env/blob/master/.dircolors
+LS_COLORS="di=$Blue;$BOLD:"
+LS_COLORS+="ln=$Cyan:"
+LS_COLORS+="ex=$Green:"
+export LS_COLORS
+
+# Auto colorize
+if [ -x /usr/bin/dircolors ]; then
+    alias ls='ls --color=auto'
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi

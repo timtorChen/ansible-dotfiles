@@ -1,0 +1,21 @@
+- name: "Link files"
+  loop: "{{ simplelink.files }}"
+  loop_control: 
+    loop_var: f
+  file:
+    state: link
+    src: "{{ f.src }}"
+    dest: "{{ f.dest }}/{{ f.src | basename }}"
+    force: "{{ f.force | default(omit) }}"
+
+- name: "Link directories"
+  loop: "{{ simplelink.dirs }}"
+  loop_control:
+    loop_var: d
+  include_role:
+    name: lib
+    tasks_from: linktree
+  vars:
+    linktree_dirs: "{{ d.src }}"
+    linktree_dest: "{{ d.dest }}"
+    linktree_force: "{{ d.force | default(omit) }}"

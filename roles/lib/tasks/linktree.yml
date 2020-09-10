@@ -1,0 +1,20 @@
+- name: Create destination directory
+  file: 
+    state: directory
+    dest: "{{ linktree_dest }}"
+
+- name: Create directories
+  with_filetree: "{{ linktree_dirs }}"
+  when: item.state == "directory"
+  file:
+    state: directory
+    dest: "{{ linktree_dest }}/{{ item.path }}"
+
+- name: Link files
+  with_filetree: "{{ linktree_dirs }}"
+  when: item.state == "file"
+  file:
+    state: link
+    src: "{{ item.src }}"
+    dest: "{{ linktree_dest }}/{{ item.path }}"
+    force: "{{ linktree_force | default(omit) }}"

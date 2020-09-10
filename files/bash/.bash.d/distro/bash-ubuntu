@@ -1,0 +1,49 @@
+source /etc/os-release
+
+if  [ "$ID" == "ubuntu" ]; then
+    ## package management
+    alias up="sudo sh -c 'apt update && apt full-upgrade && apt autoremove --purge && apt clean && snap refresh && brew update'"
+    alias apt-install="sudo apt install"
+    alias apt-list="apt list --installed"
+    alias apt-remove="sudo apt autoremove --purge"      # `apt autormove` removes the package and its dependencies
+                                                        # with `--purge` options apt will also remove package configuration files
+
+    complete -F _complete_alias apt-install
+    complete -F _complete_alias apt-remove
+fi
+
+
+shellenv() {
+    if uname -a | grep -q microsoft; then
+        echo "windows-wsl"
+    elif uname -a | grep -q Ubuntu; then
+        if [ -d "/usr/share/xsessions" ]; then
+            echo "ubuntu-desktop"
+        else
+            echo "ubuntu-server"
+        fi
+    fi
+}
+
+## -----  the following is not yet organized ------
+
+# 🐆 Ubuntu desktop only
+if [ "$(shellenv)" = "ubuntu-desktop" ]; then
+
+
+    # Display and Hibernate
+    displayoff() { xset -display :0.0 dpms force off ; }
+
+    hibernate() {
+        second="$1"
+        sudo sh -c " \
+        xset -display :0.0 dpms force off && \
+        sleep $second && \
+        pm-suspend && \
+        xset -display :0.0 dpms force on
+        "
+    }
+
+    # Alert
+    alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+fi

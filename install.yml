@@ -1,0 +1,38 @@
+- name: "Setup fedora desktop environment"
+  hosts: local
+  vars_files:
+  - vars/fedora-desktop.yml
+
+  tasks:
+  - name: "Link config files"
+    include_role:
+      name: lib
+      tasks_from: simplelink
+    tags: config 
+
+  - name: "Install config plugins, and modify permissions"
+    loop:
+    - ssh
+    - tmux
+    loop_control:
+      loop_var: task
+    include_role:
+      name: common
+      tasks_from: "{{ task }}"
+    tags: config
+
+
+  - name: "Install packages"
+    loop: 
+    - fedora
+    - brew 
+    - flatpak
+    - gnome
+    - docker
+
+    loop_control:
+      loop_var: task
+    include_role: 
+      name: common
+      tasks_from: "{{ task }}"
+    tags: package

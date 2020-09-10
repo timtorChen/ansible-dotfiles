@@ -1,0 +1,75 @@
+{
+    // ----------外觀-----------
+    // 整體主題
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Monokai",
+    "workbench.colorCustomizations": {
+        "terminal.ansiGreen": "#A9D3AB",
+        "terminal.ansiBrightGreen": "#A9D3AB",
+        "terminal.ansiRed": "#F58E8E",
+        "terminal.ansiBrightRed": "#F58E8E",
+        "terminal.ansiYellow": "#FED37E",
+        "terminal.ansiCyan": "#79D4D5",
+        "terminal.ansiBrightCyan": "#79D4D5",
+        "terminal.ansiBlue": "#7AABD4"
+    },
+    "workbench.iconTheme": "vscode-icons",
+    
+    // 編輯器外框
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "window.menuBarVisibility": "toggle",
+    "workbench.editor.showTabs": true,
+    "window.titleBarStyle": "custom",
+
+    // 字型與終端機
+    // Consolas 爲 Windows 專利字體，在其他作業系統上需要額外下載並設定
+    // Source code pro 爲專爲終端介面設計字體， Source code pro for powerline 爲其延伸字體
+    "editor.fontFamily": "Consolas, Noto Color Emoji, Noto Sans CJK TC",
+    "editor.fontSize": 14.5,
+    "terminal.integrated.fontFamily": "source code pro for powerline, Consolas, Noto Color Emoji, Noto Sans CJK TC",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.rendererType": "auto",
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.env.linux": {
+        // 預設環境變數
+        "VSCODE_WORKSPACE": "vscode"
+    },
+    // -----------內部----------    
+    // 程式語言
+    "markdown.preview.fontFamily": "-apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "python.linting.enabled": false,
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "*.txt": "yaml",
+        "*.desktop": "systemd-unit-file",
+        "*.conf": "shellscript",
+        ".vimrc": "shellscript",
+        "bash-*": "shellscript",
+        "config": "ssh_config",
+        "sshd_config": "ini",
+        "*.gotmpl": "helm"
+    },
+    // 避免麻煩與未整理的設定
+    "explorer.confirmDelete": false,
+    "workbench.startupEditor": "none",
+    "explorer.confirmDragAndDrop": false,
+    "liveServer.settings.donotVerifyTags": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "editor.suggestSelection": "first",
+    "liveshare.presence": true,
+    "extensions.ignoreRecommendations": false,
+    "vsicons.dontShowNewVersionMessage": true,
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "vs-kubernetes": {
+        "vs-kubernetes.minikube-path.linux": "/home/timtor/.vs-kubernetes/tools/minikube/linux-amd64/minikube"
+    },
+    "git-graph.openDiffTabLocation": "Beside",
+    "diffEditor.renderSideBySide": false,
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    }
+}

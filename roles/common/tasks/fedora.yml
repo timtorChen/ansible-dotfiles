@@ -1,0 +1,72 @@
+- name: "repo - add raw repos"
+  become: yes
+  loop: "{{ fedora.repo.raws }}"
+  yum_repository:
+    name: "{{ item.name }}"
+    description: "{{ item.description }}"
+    baseurl: "{{ item.baseurl }}"
+    gpgkey: "{{ item.gpgkey }}"
+    gpgcheck: "{{ item.gpgcheck }}"
+
+# sudo dnf config-manager --add-repo [ urls ]
+- name: "repo - add file repos"
+  become: yes
+  loop: "{{ fedora.repo.urls }}"
+  shell: "dnf config-manager --add-repo {{ item }}"
+
+
+# sudo dnf install [ packages ]
+- name: "repo - add packaged repos"
+  become: yes
+  loop: "{{ fedora.repo.packages }}"
+  dnf:
+    name: "{{ item }}"
+
+# sudo dnf config-manager --enable [ enables ]
+- name: "repo - enable repos"
+  become: yes
+  loop: "{{ fedora.repo.enables }}"
+  dnf:
+    enablerepo: "{{ item }}"
+
+# sudo rpm --import [ gpgkeys ]
+- name: "keys - add public gpg keys"
+  become: yes
+  loop: "{{ fedora.gpgkeys }}"
+  rpm_key:
+    key: "{{ item }}"
+
+# sudo dnf update
+- name: "dnf - update all package"  
+  # while become: true, ansible defaultly uses
+  #   become_methed: sudo
+  #   become_user: root  
+  become: yes
+  dnf:
+    name: "*"
+    # some attributes are doing the same work but in different names
+    #   state: installed, and state: present are the same
+    #   state: uninstall, and state: absent are the same
+    # Normally, the default state is installed 
+    # if you attributes autoremove: yes, the state is default to uninstall
+    state: latest
+
+# sudo dnf install [ install_packages ]
+- name: "dnf - install packages"
+  become: yes
+  loop: "{{ fedora.install_packages }}"
+  dnf: 
+    name: "{{ item }}"
+
+# sudo dnf remove [ remove_packages ]
+- name: "dnf - remove packages"
+  become: yes
+  loop: "{{ fedora.remove_packages }}"
+  dnf:
+    name: "{{ item }}"
+
+# sudo dnf autoremove 
+- name: "dnf - autoremove unused dependency packages"
+  become: yes
+  dnf: 
+    autoremove: yes

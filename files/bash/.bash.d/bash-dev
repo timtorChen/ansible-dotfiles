@@ -1,0 +1,66 @@
+# docker
+alias dk="docker"
+alias dk-image="docker images"
+alias dk-container="docker ps -a"
+alias dk-remove-unused-images="docker image prune -f"
+alias dk-remove-unused-containers="docker container prune -f"
+alias dc="docker-compose"
+alias dc-restart="docker-compose down && docker-compose up -d"
+alias dc-log="docker-compose logs -f"
+
+complete -F _complete_alias dk
+complete -F _complete_alias dc
+
+# kubectl
+alias kb="kubectl"
+complete -F _complete_alias kb 
+
+# helm
+alias helm="hm"
+complete -F _complete_alias hm
+
+# hub
+export GITHUB_USER="timtorchen"
+
+_gh_create(){
+    reponame="$1" 
+    dirname="$(basename $(pwd))"
+
+    if [ -z "$reponame" ]; then
+        hub init
+        hub create "$dirname"
+    else 
+        hub init 
+        hub create "$reponame"
+    fi
+}
+
+_gh_create_private(){
+    reponame="$1" 
+    dirname="$(basename $(pwd))"
+
+    if [ -z "$reponame" ]; then
+        hub init
+        hub create -p "$dirname"
+    else 
+        hub init 
+        hub create -p "$reponame"
+    fi
+}
+
+_gh_delete(){
+    reponame="$1"
+    dirname="$(basename $(pwd))"
+
+    if [ -z "$reponame" ]; then
+        hub delete -y "$dirname"
+    else
+        hub delete -y "$GITHUB_USER/$1"
+    fi
+}
+
+alias gh="hub"
+alias gh-create="_gh_create"
+alias gh-create-private="_gh_create_private"
+alias gh-delete="_gh_delete"
+complete -F _complete_alias gh
